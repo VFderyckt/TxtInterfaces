@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="TxtInterfaces.Controls.Seasons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TxtInterfaces.Controls"
+             xmlns:ExtendedGridControl="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"
+             xmlns:ExtendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
+             mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TxtInterfaces.Classes"
+             l:AttachedBehaviours.LoadedCommand="{Binding DataContext.GetSeasons,ElementName=SeasonsView}"
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="SeasonsView">
+    <UserControl.Resources>
+        <l:CmdTxtConverter x:Key="cmdTxtConverter" />
+        <l:EnableConverter x:Key="enableConverter" />
+        <l:BoolToVisConverter x:Key="boolToVisConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <ExtendedGridControl:ExtendedDataGrid GroupByControlVisibility="Collapsed" x:Name="DgrSeasons" ItemsSource="{Binding LstSeasons}" IsReadOnly="true" Margin="5" SelectionMode="Single">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding DataContext.SelChange,ElementName=SeasonsView}"
+                             CommandParameter="{Binding SelectedItem,ElementName=DgrSeasons}" />
+                </i:EventTrigger>
+                </i:Interaction.Triggers>
+        </ExtendedGridControl:ExtendedDataGrid>
+        <StackPanel Grid.Column="1">
+            <StackPanel>
+                <StackPanel.IsEnabled>
+                    <Binding Path="Season.Log_upd_user" Converter="{StaticResource enableConverter}"/>
+                </StackPanel.IsEnabled>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="FcstModel: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboModel" HorizontalAlignment="left" Text="{Binding Season.Fcst_model}" ItemsSource="{Binding LstModel}" DisplayMemberPath="fcst_model">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding DataContext.SelChangeModel,ElementName=SeasonsView}"
+                                 CommandParameter="{Binding SelectedValue,ElementName=CboModel}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Collection: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="TxtCollection"  Width="200" Text="{Binding Season.Fcst_collection}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Description: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <TextBox x:Name="TxtDescription"  Width="200" Text="{Binding Season.Fcst_collection_desc}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Level: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="TxtLevel"  Width="200" Text="{Binding Season.Fcst_coll_Level}" ItemsSource="{Binding LstLevel}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Father: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CboFather"  Width="200" Text="{Binding Season.Fcst_coll_Father}" ItemsSource="{Binding LstFather}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Priority: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <TextBox x:Name="TxtPrio"  Width="200" Text="{Binding Season.Priority}">
+                    <i:Interaction.Behaviors>
+                        <l:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9]" MaxLength="5" />
+                    </i:Interaction.Behaviors>
+                 </TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="SMU: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <CheckBox x:Name="TxtSMU"  Width="200" IsChecked="{Binding Season.SMU_flag}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Previous Collection: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CboPrevColl"  Width="200" Text="{Binding Season.Coll_previous}" ItemsSource="{Binding LstCollection}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Previous Same Season: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CboPrevCollSS"  Width="200" Text="{Binding Season.Coll_Previous_Same_Season}" ItemsSource="{Binding LstCollection}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Deleted: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <CheckBox x:Name="TxtDel"  Width="200" IsChecked="{Binding Season.Deleted_flag}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,5" HorizontalAlignment="Right">
+                <Button x:Name="BtnDuplicate" Width="80" Margin="0,0,5,0" Content="Duplicate" Command="{Binding DataContext.Duplicate,ElementName=SeasonsView}">
+                    <Button.Visibility>
+                        <MultiBinding Converter="{StaticResource boolToVisConverter}">
+                            <Binding ElementName="CboModel" Path="IsEnabled"/>
+                        </MultiBinding>
+                    </Button.Visibility>
+                </Button>
+                <Button x:Name="BtnUpd" Width="80" Command="{Binding DataContext.AddSeason,ElementName=SeasonsView}">
+                    <Button.Content>
+                        <Binding Path="Season.Log_upd_user" Converter="{StaticResource cmdTxtConverter}"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

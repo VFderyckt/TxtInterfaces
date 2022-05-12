@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="VFTXT_IFACES" Class="TxtIfacesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=veat2w000142\sql_vans_reef;Initial Catalog=VFTXT_IFACES;Integrated Security=True" SettingsObjectName="TxtInterfaces.Properties.Settings" SettingsPropertyName="VFTXT_IFACESConnectionString1" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.sp_Interface_GetParams" Method="sp_Interface_GetParams">
+    <Parameter Name="userid" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="sp_Interface_GetParamsResult">
+      <Column Name="acc" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_GetFcstModels" Method="sp_Interface_GetFcstModels">
+    <ElementType Name="sp_Interface_GetFcstModelsResult">
+      <Column Name="fcst_model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_UpdSeason" Method="sp_Interface_UpdSeason">
+    <Parameter Name="Add" Parameter="add" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Fcst_model" Parameter="fcst_model" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="Fcst_collection" Parameter="fcst_collection" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Fcst_collection_desc" Parameter="fcst_collection_desc" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="Fcst_coll_Level" Parameter="fcst_coll_Level" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Fcst_coll_Father" Parameter="fcst_coll_Father" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Priority" Parameter="priority" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="SMU_flag" Parameter="sMU_flag" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Coll_previous" Parameter="coll_previous" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Coll_Previous_Same_Season" Parameter="coll_Previous_Same_Season" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Deleted_flag" Parameter="deleted_flag" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Interface_GetSeasons" Method="sp_Interface_GetSeasons">
+    <ElementType Name="sp_Interface_GetSeasonsResult">
+      <Column Name="Fcst_model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_collection" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_collection_desc" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_coll_Level" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_coll_Father" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Priority" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="SMU_flag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Coll_previous" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Coll_Previous_Same_Season" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Log_upd_time" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Log_upd_user" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Deleted_flag" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_GetCountries" Method="sp_Interface_GetCountries">
+    <ElementType Name="sp_Interface_GetCountriesResult">
+      <Column Name="Fcst_model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="CountryId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CountryDesc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Country_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Country_FatherId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CrossCountryId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Currency_code" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="Log_upd_time" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Log_upd_user" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Deleted_flag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_UpdCountry" Method="sp_Interface_UpdCountry">
+    <Parameter Name="Add" Parameter="add" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Fcst_model" Parameter="fcst_model" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="CountryId" Parameter="countryId" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CountryDesc" Parameter="countryDesc" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Country_Level" Parameter="country_Level" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Country_FatherId" Parameter="country_FatherId" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="CrossCountryId" Parameter="crossCountryId" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Currency_code" Parameter="currency_code" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="Deleted_flag" Parameter="deleted_flag" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Interface_GetCustomers" Method="sp_Interface_GetCustomers">
+    <ElementType Name="sp_Interface_GetCustomersResult">
+      <Column Name="Fcst_model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_Customer" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_CustomerD" Type="System.String" DbType="VarChar(80) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_Cust_Level" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_Cust_Father" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Fcst_Excluded" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_Cust_Type" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="log_upd_time" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Log_upd_user" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Deleted_flag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_UpdCustomers" Method="sp_Interface_UpdCustomers">
+    <Parameter Name="Add" Parameter="add" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Fcst_model" Parameter="fcst_model" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="Fcst_customer" Parameter="fcst_customer" Type="System.String" DbType="VarChar(8)" />
+    <Parameter Name="Fcst_customerD" Parameter="fcst_customerD" Type="System.String" DbType="VarChar(80)" />
+    <Parameter Name="Fcst_Cust_Level" Parameter="fcst_Cust_Level" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Fcst_Cust_Father" Parameter="fcst_Cust_Father" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Fcst_Excluded" Parameter="fcst_Excluded" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Fcst_Cust_Type" Parameter="fcst_Cust_Type" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="Deleted_flag" Parameter="deleted_flag" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Interface_GetXCustomers" Method="sp_Interface_GetXCustomers">
+    <ElementType Name="sp_Interface_GetXCustomersResult">
+      <Column Name="Fcst_model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Customer_code" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Customer_door" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CrossCustomer_code" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CrossCustomer_door" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CrossCustomer_country" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="log_upd_time" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Log_upd_user" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Deleted_flag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_GetXCountries" Method="sp_Interface_GetXCountries">
+    <ElementType Name="sp_Interface_GetXCountriesResult">
+      <Column Name="fcst_model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="countryId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="countryDesc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_UpdXCustomers" Method="sp_Interface_UpdXCustomers">
+    <Parameter Name="Add" Parameter="add" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Fcst_model" Parameter="fcst_model" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="customer_code" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="customer_door" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="crosscustomer_code" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="crosscustomer_door" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="crosscustomer_country" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Deleted_flag" Parameter="deleted_flag" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Interface_UpdImpSeason" Method="sp_Interface_UpdImpSeason">
+    <Parameter Name="Add" Parameter="add" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Fcst_model" Parameter="fcst_model" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="Fcst_collection" Parameter="fcst_collection" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Fcst_ImportActive" Parameter="fcst_ImportActive" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DueDateFrom" Parameter="dueDateFrom" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="DueDateTo" Parameter="dueDateTo" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="SFA_Collection" Parameter="sFA_Collection" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Storedatefrom" Parameter="storedatefrom" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="Storedateto" Parameter="storedateto" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="DeadlineDate" Parameter="deadlineDate" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="ForecastingUntilDate" Parameter="forecastingUntilDate" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="Deleted_flag" Parameter="deleted_flag" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Interface_GetImpSeasons" Method="sp_Interface_GetImpSeasons">
+    <ElementType Name="sp_Interface_GetImpSeasonsResult">
+      <Column Name="Fcst_model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_collection" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_ImportActive" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DueDateFrom" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="DueDateTo" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="SFA_Collection" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Storedatefrom" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Storedateto" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="DeadlineDate" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="ForecastingUntilDate" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Log_upd_time" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Log_upd_user" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Deleted_flag" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_GetEopsSeasons" Method="sp_Interface_GetEopsSeasons">
+    <ElementType Name="sp_Interface_GetEopsSeasonsResult">
+      <Column Name="fcst_model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_collection" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="LastDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_GetProdCat" Method="sp_Interface_GetProdCat">
+    <ElementType Name="sp_Interface_GetProdCatResult">
+      <Column Name="Fcst_model" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Prodcat" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Calc_EOPS" Method="sp_Calc_EOPS">
+    <Parameter Name="FCST_MODEL" Parameter="fCST_MODEL" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="Fcst_Collection" Parameter="fcst_Collection" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Product_Category" Parameter="product_Category" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Replace" Parameter="replace" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DUMP" Parameter="dUMP" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Interface_GetImportCustomers" Method="sp_Interface_GetImportCustomers">
+    <ElementType Name="sp_Interface_GetImportCustomersResult">
+      <Column Name="Fcst_Model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_Priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_Customer" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="Customer_code" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Delivery_addresscode" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Collection_From" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="Collection_To" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="Product_Category_From" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="Product_Category_To" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="Division" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="SalesRegion" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CCSalesRegion" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ClassIDFrom" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ClassIDto" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Definition_level" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Log_upd_time" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Log_upd_user" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[Deleted Flag]" Member="Deleted_Flag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_UpdImportCustomers" Method="sp_Interface_UpdImportCustomers">
+    <Parameter Name="Add" Parameter="add" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Fcst_model" Parameter="fcst_model" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="Fcst_Priority" Parameter="fcst_Priority" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Fcst_Customer" Parameter="fcst_Customer" Type="System.String" DbType="VarChar(8)" />
+    <Parameter Name="Customer_code" Parameter="customer_code" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Delivery_addresscode" Parameter="delivery_addresscode" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Collection_From" Parameter="collection_From" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="Collection_To" Parameter="collection_To" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="Product_Category_From" Parameter="product_Category_From" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="Product_Category_To" Parameter="product_Category_To" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="Division" Parameter="division" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="SalesRegion" Parameter="salesRegion" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="CCSalesRegion" Parameter="cCSalesRegion" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="ClassIDFrom" Parameter="classIDFrom" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="ClassIDto" Parameter="classIDto" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Definition_level" Parameter="definition_level" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Comment" Parameter="comment" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Deleted_flag" Parameter="deleted_flag" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Interface_GetCustomersDoors" Method="sp_Interface_GetCustomersDoors">
+    <ElementType Name="sp_Interface_GetCustomersDoorsResult">
+      <Column Name="Fcst_Model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Customer_Code" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Customer_Door" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_CopyCfgTxtvsSap" Method="sp_Interface_CopyCfgTxtvsSap">
+    <Parameter Name="Fcst_model" Parameter="fcst_model" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="sapssnyr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="txtcollection" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="collectionFrom" Type="System.String" DbType="VarChar(5)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Interface_GetCfgSplitChannel" Method="sp_Interface_GetCfgSplitChannel">
+    <ElementType Name="sp_Interface_GetCfgSplitChannelResult">
+      <Column Name="Fcst_model" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="SplitChannel" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="MainChannel" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="Log_upd_time" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Log_upd_user" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Deleted_flag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_UpdCfgSplitChannel" Method="sp_Interface_UpdCfgSplitChannel">
+    <Parameter Name="Add" Parameter="add" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Fcst_model" Parameter="fcst_model" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="SplitChannel" Parameter="splitChannel" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="MainChannel" Parameter="mainChannel" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="Deleted_flag" Parameter="deleted_flag" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Interface_GetPlants" Method="sp_Interface_GetPlants">
+    <ElementType Name="sp_Interface_GetPlantsResult">
+      <Column Name="Fcst_model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_Plant" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="Priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="log_upd_time" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Log_upd_user" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Deleted_flag" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Fcst_DC" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_GetSAPvsTxt" Method="sp_Interface_GetSAPvsTxt">
+    <ElementType Name="sp_Interface_GetSAPvsTxtResult">
+      <Column Name="Fcst_model" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="SAPReqSegment" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="SAPPlant" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="SAPSsnYr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SAPSsn" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="TxtCollection" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="TxtChannel" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="TxtOrderType" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="TxtCustomer" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="ExportToSAP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SAPExtRegId" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="FlagAlignSO" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="FLagFcst" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DemandOffSetDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Log_Upd_Time" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Log_upd_User" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UsePlant" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Fcst_DC" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_GetDCs" Method="sp_Interface_GetDCs">
+    <ElementType Name="sp_Interface_GetDCsResult">
+      <Column Name="Fcst_model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_DC" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="Fcst_DC_Description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Log_upd_time" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Log_upd_user" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Deleted_flag" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_UpdPlants" Method="sp_Interface_UpdPlants">
+    <Parameter Name="Add" Parameter="add" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Fcst_model" Parameter="fcst_model" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="Fcst_Plant" Parameter="fcst_Plant" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="priority" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Fcst_DC" Parameter="fcst_DC" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Deleted_flag" Parameter="deleted_flag" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Interface_UpdSAPvsTxt" Method="sp_Interface_UpdSAPvsTxt">
+    <Parameter Name="Add" Parameter="add" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Fcst_model" Parameter="fcst_model" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="sapreqseg" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="sapplant" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="sapssnyr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sapssn" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="txtcoll" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="txtchannel" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="txtordertype" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="txtcustomer" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="export" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="sapextregid" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="alignso" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="fcst" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="offset" Type="System.Int32" DbType="Int" />
+    <Parameter Name="useplant" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="fcst_dc" Type="System.String" DbType="VarChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

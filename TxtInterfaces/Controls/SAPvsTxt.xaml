@@ -1,0 +1,203 @@
+﻿<UserControl x:Class="TxtInterfaces.Controls.SAPvsTxt"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ExtendedGridControl="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"
+             xmlns:ExtendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
+             mc:Ignorable="d" 
+              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TxtInterfaces.Classes"
+             l:AttachedBehaviours.LoadedCommand="{Binding DataContext.GetSAPvsTxt,ElementName=SapvsTxtView}"
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="SapvsTxtView">
+    <UserControl.Resources>
+        <l:BooleanAndConverter x:Key="BAndConverter" />
+        <l:RevBooleanAndConverter x:Key="RBAndConverter" />
+        <l:BoolToVisConverter x:Key="boolToVisConverter" />
+        <l:RevBoolConverter x:Key="RevBConverter" />
+        <l:EnableConverter x:Key="enableConverter" />
+        <l:CmdTxtConverter x:Key="cmdTxtConverter" />
+        <l:GetDevPlantConverter x:Key="getDevPlantConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <ExtendedGridControl:ExtendedDataGrid AutoGenerateColumns="False" HideColumnChooser="True" GroupByControlVisibility="Collapsed" x:Name="DgrSapvsTxt" ItemsSource="{Binding LstSAPvsTxt}" IsReadOnly="true" Margin="5" SelectionMode="Single" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding DataContext.SelChange,ElementName=SapvsTxtView}"
+                             CommandParameter="{Binding SelectedItem,ElementName=DgrSapvsTxt}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <DataGrid.Columns>
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="Fcst Model" AllowAutoFilter="True" Binding="{Binding Fcst_model}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="SAP ReqSegment" AllowAutoFilter="True" Binding="{Binding SAPReqSegment}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="SAP Plant" AllowAutoFilter="True" Binding="{Binding SAPPlant}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="SAP Year" AllowAutoFilter="True" Binding="{Binding SAPSsnYr}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="SAP Season" AllowAutoFilter="True" Binding="{Binding SAPSsn}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="TXT Collection" AllowAutoFilter="True" Binding="{Binding TxtCollection}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="TXT Channel" AllowAutoFilter="True" Binding="{Binding TxtChannel}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="TXT Ordertype" AllowAutoFilter="True" Binding="{Binding TxtOrderType}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="TXT Customer" AllowAutoFilter="True" Binding="{Binding TxtCustomer}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="Flag Fcst" AllowAutoFilter="True" Binding="{Binding FLagFcst}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="Demand Offset days" AllowAutoFilter="True" Binding="{Binding DemandOffSetDays}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="Export To SAP" AllowAutoFilter="True" Binding="{Binding ExportToSAP}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="UsePlant" AllowAutoFilter="True" Binding="{Binding UsePlant}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="SAP Ext RegId" AllowAutoFilter="True" Binding="{Binding SAPExtRegId}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="Last Updated" AllowAutoFilter="True" Binding="{Binding Log_Upd_Time}" />
+                <ExtendedColumn:ExtendedDataGridTextColumn Header="User" AllowAutoFilter="True" Binding="{Binding Log_upd_User}" />
+            </DataGrid.Columns>
+        </ExtendedGridControl:ExtendedDataGrid>
+        <StackPanel Grid.Column="1" >
+            <StackPanel IsEnabled="{Binding ElementName=DgrSapvsTxt, Path=SelectedItem, Converter={StaticResource enableConverter}}">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="FcstModel: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboModel" HorizontalAlignment="left" Text="{Binding SAPvsTxt.Fcst_model}" ItemsSource="{Binding LstModel}" DisplayMemberPath="fcst_model">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding DataContext.SelChangeModel,ElementName=SapvsTxtView}"
+                                 CommandParameter="{Binding SelectedValue,ElementName=CboModel}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <StackPanel.Visibility>
+                        <MultiBinding Converter="{StaticResource boolToVisConverter}">
+                            <Binding ElementName="ChkCopy" Path="IsEnabled"  Converter="{StaticResource RevBConverter}"/>
+                        </MultiBinding>
+                    </StackPanel.Visibility>
+                    <CheckBox x:Name="ChkCopy" Margin="0,4,0,0" HorizontalAlignment="Center" IsChecked="{Binding ChkCopy}">
+                        <TextBlock Text="Copy From : " Margin="5,0,5,0" VerticalAlignment="Center"/>
+                    </CheckBox>
+                    <ComboBox x:Name="CboSsnFrom" ItemsSource="{Binding LstFrom}" Text="{Binding SsnFrom}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel>
+                <StackPanel.IsEnabled>
+                    <MultiBinding Converter="{StaticResource RBAndConverter}">
+                        <Binding ElementName="ChkCopy" Path="IsEnabled"/>
+                        <Binding ElementName="ChkCopy" Path="IsChecked"  Converter="{StaticResource RevBConverter}" />
+                    </MultiBinding>
+                </StackPanel.IsEnabled>
+                <StackPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource boolToVisConverter}">
+                        <Binding ElementName="ChkCopy" Path="IsEnabled"/>
+                        <Binding ElementName="ChkCopy" Path="IsChecked"/>
+                    </MultiBinding>
+                </StackPanel.Visibility>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="SAP ReqSegement: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboSAPReqSegement"  Width="100" Text="{Binding SAPvsTxt.SAPReqSegment}" ItemsSource="{Binding LstSAPReqSeg}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="SAP Plant: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboPlant" HorizontalAlignment="left" Width="100" Text="{Binding SAPvsTxt.SAPPlant}" ItemsSource="{Binding LstPlants}" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5" IsEnabled="{Binding ElementName=CboModel,Path=IsEnabled}">
+                <TextBlock Text="SAP Year: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CboSapYear"  Width="100" Text="{Binding SAPvsTxt.SAPSsnYr}" ItemsSource="{Binding LstYr}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <StackPanel.IsEnabled>
+                    <MultiBinding Converter="{StaticResource RBAndConverter}">
+                        <Binding ElementName="ChkCopy" Path="IsEnabled"/>
+                        <Binding ElementName="ChkCopy" Path="IsChecked" Converter="{StaticResource RevBConverter}"/>
+                    </MultiBinding>
+                </StackPanel.IsEnabled>
+                <StackPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource boolToVisConverter}">
+                        <Binding ElementName="ChkCopy" Path="IsEnabled"/>
+                        <Binding ElementName="ChkCopy" Path="IsChecked"/>
+                    </MultiBinding>
+                </StackPanel.Visibility>
+                <TextBlock Text="SAP Season: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CboSAPSeason"  Width="100" Text="{Binding SAPvsTxt.SAPSsn}" ItemsSource="{Binding LstSAPSsn}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Txt Collection: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboCollection"  Width="200" Text="{Binding SAPvsTxt.TxtCollection}" ItemsSource="{Binding LstTxtSsn}" />
+                </StackPanel>
+            <StackPanel>
+                <StackPanel.IsEnabled>
+                    <MultiBinding Converter="{StaticResource BAndConverter}">
+                        <Binding ElementName="ChkCopy" Path="IsEnabled"/>
+                        <Binding ElementName="ChkCopy" Path="IsChecked"/>
+                    </MultiBinding>
+                </StackPanel.IsEnabled>
+                <StackPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource boolToVisConverter}">
+                        <Binding ElementName="ChkCopy" Path="IsEnabled"/>
+                        <Binding ElementName="ChkCopy" Path="IsChecked"/>
+                    </MultiBinding>
+                </StackPanel.Visibility>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Txt Channel: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="TxtChannel"  Width="50" Text="{Binding SAPvsTxt.TxtChannel}" ItemsSource="{Binding LstChannel}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Txt Ordertype: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboOrderType"  Width="50" Text="{Binding SAPvsTxt.TxtOrderType}" ItemsSource="{Binding LstTxtOT}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Txt Customer: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboCustomer"  Width="100" Text="{Binding SAPvsTxt.TxtCustomer}" ItemsSource="{Binding LstTxtCust}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <CheckBox x:Name="ChkFlagForecast"  IsChecked="{Binding SAPvsTxt.FLagFcst}" FlowDirection="RightToLeft">
+                        <TextBlock Width="80" FlowDirection="LeftToRight" Text="Forecast Flag " />
+                    </CheckBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Demand Offset: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="TxtDemandOffsetDays"  Width="200" Text="{Binding SAPvsTxt.DemandOffSetDays}">
+                        <i:Interaction.Behaviors>
+                            <l:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9]" MaxLength="5" />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5" ToolTip="Identify Which Configuration To Use For The Defaultplant">
+                    <CheckBox x:Name="ChkExportToSAP" FlowDirection="RightToLeft" IsChecked="{Binding SAPvsTxt.ExportToSAP}">
+                        <TextBlock Width="80" FlowDirection="LeftToRight" Text="ExportToSAP " />
+                    </CheckBox>
+                </StackPanel>
+                <StackPanel x:Name="StpUsePlant" Orientation="Horizontal" Margin="5">
+                    <CheckBox x:Name="ChkUsePlant"  IsChecked="{Binding SAPvsTxt.UsePlant}" FlowDirection="RightToLeft">
+                        <TextBlock Width="160" FlowDirection="LeftToRight">
+                            <TextBlock.Text>
+                                <MultiBinding Converter="{StaticResource getDevPlantConverter}">
+                                    <Binding Path="SAPvsTxt.ExportToSAP"/>
+                                    <Binding Path="LstSAPvsTxt"/>
+                                    <Binding Path="SAPvsTxt.Fcst_model"/>
+                                    <Binding Path="SAPvsTxt.TxtChannel"/>
+                                    <Binding Path="SAPvsTxt.TxtOrderType"/>
+                                    <Binding Path="SAPvsTxt.TxtCollection"/>
+                                    <Binding Path="SAPvsTxt.SAPPlant"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </CheckBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="SAP External RegID: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="TxtSAPExtRegId"  Width="200" Text="{Binding SAPvsTxt.SAPExtRegId}" />
+                </StackPanel>
+                <!--StackPanel Orientation="Horizontal" Margin="5">
+                    <CheckBox x:Name="ChkFlagAlignSO" FlowDirection="RightToLeft" IsChecked="{Binding SAPvsTxt.FlagAlignSO}">
+                        <TextBlock Width="80" FlowDirection="LeftToRight" Text="Align SO " />
+                    </CheckBox>
+                </-->
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,5" HorizontalAlignment="Right">
+                <Button x:Name="BtnUpd" Width="80" Command="{Binding DataContext.AddSAPvsTxt,ElementName=SapvsTxtView}">
+                    <Button.Content>
+                        <Binding ElementName="CboModel" Path="IsEnabled" Converter="{StaticResource cmdTxtConverter}"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

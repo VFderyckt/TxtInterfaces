@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="TxtInterfaces.Controls.ImpSeasons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TxtInterfaces.Controls"
+             xmlns:ExtendedGridControl="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"
+             xmlns:ExtendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
+             mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TxtInterfaces.Classes"
+             l:AttachedBehaviours.LoadedCommand="{Binding DataContext.GetImpSeasons,ElementName=ImpSeasonsView}"
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="ImpSeasonsView">
+    <UserControl.Resources>
+        <l:CmdTxtConverter x:Key="cmdTxtConverter" />
+        <l:EnableConverter x:Key="enableConverter" />
+        <l:BoolToVisConverter x:Key="boolToVisConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <ExtendedGridControl:ExtendedDataGrid GroupByControlVisibility="Collapsed" x:Name="DgrImpSeasons" ItemsSource="{Binding LstImpSeasons}" IsReadOnly="true" Margin="5" SelectionMode="Single">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding DataContext.SelChange,ElementName=ImpSeasonsView}"
+                             CommandParameter="{Binding SelectedItem,ElementName=DgrImpSeasons}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ExtendedGridControl:ExtendedDataGrid>
+        <StackPanel Grid.Column="1">
+            <StackPanel IsEnabled="{Binding ImpSeason.Log_upd_user, Converter={StaticResource enableConverter}}">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="FcstModel: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboModel" HorizontalAlignment="left" Text="{Binding ImpSeason.Fcst_model}" ItemsSource="{Binding LstModel}" DisplayMemberPath="fcst_model">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding DataContext.SelChangeModel,ElementName=ImpSeasonsView}"
+                             CommandParameter="{Binding SelectedValue,ElementName=CboModel}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Collection: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboCollection"  Width="200" Text="{Binding ImpSeason.Fcst_collection}" ItemsSource="{Binding LstCollection}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Import Active: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <CheckBox x:Name="ChkImpAct"  Width="200" IsChecked="{Binding ImpSeason.Fcst_ImportActive}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Duedate From: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <DatePicker x:Name="DtpDDFrom"  Width="200" SelectedDate="{Binding ImpSeason.DueDateFrom}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Duedate To: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <DatePicker x:Name="DtpDDTo"  Width="200" SelectedDate="{Binding ImpSeason.DueDateTo}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="SFACollection: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <TextBox x:Name="TxtSFACol"  Width="200" Text="{Binding ImpSeason.SFA_Collection}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Storedate From: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <DatePicker x:Name="DtpSDFrom"  Width="200" SelectedDate="{Binding ImpSeason.Storedatefrom}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Storedate To: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <DatePicker x:Name="DtpSDTo"  Width="200" SelectedDate="{Binding ImpSeason.Storedateto}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Deadline: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <DatePicker x:Name="DtpDeathTo"  Width="200" SelectedDate="{Binding ImpSeason.DeadlineDate}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Forecast Until: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <DatePicker x:Name="DtpFU"  Width="200" SelectedDate="{Binding ImpSeason.ForecastingUntilDate}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Deleted: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <CheckBox x:Name="TxtDel"  Width="200" IsChecked="{Binding ImpSeason.Deleted_flag}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,5" HorizontalAlignment="Right">
+                <Button x:Name="BtnDuplicate" Width="80" Margin="0,0,5,0" Content="Duplicate" Command="{Binding DataContext.Duplicate,ElementName=ImpSeasonsView}">
+                    <Button.Visibility>
+                        <MultiBinding Converter="{StaticResource boolToVisConverter}">
+                            <Binding ElementName="CboModel" Path="IsEnabled"/>
+                        </MultiBinding>
+                    </Button.Visibility>
+                </Button>
+                <Button x:Name="BtnUpd" Content="{Binding ImpSeason.Log_upd_user, Converter={StaticResource cmdTxtConverter}}"  Width="80" Command="{Binding DataContext.AddImpSeason,ElementName=ImpSeasonsView}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

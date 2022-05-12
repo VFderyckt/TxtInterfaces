@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="TxtInterfaces.Controls.XCustomers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TxtInterfaces.Controls"
+             xmlns:ExtendedGridControl="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"
+             xmlns:ExtendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
+             mc:Ignorable="d"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TxtInterfaces.Classes"
+             l:AttachedBehaviours.LoadedCommand="{Binding DataContext.GetXCustomers,ElementName=XCustomersView}"
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="XCustomersView">
+    <UserControl.Resources>
+        <l:RevBoolConverter x:Key="revBoolConverter"/>
+        <l:CmdTxtConverter x:Key="cmdTxtConverter" />
+        <l:EnableConverter x:Key="enableConverter" />
+        <l:BoolToVisConverter x:Key="boolToVisConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <ExtendedGridControl:ExtendedDataGrid GroupByControlVisibility="Collapsed" x:Name="DgrXCustomers" ItemsSource="{Binding LstXCustomers}" IsReadOnly="true" Margin="5" SelectionMode="Single">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding DataContext.SelChange,ElementName=XCustomersView}"
+                             CommandParameter="{Binding SelectedItem,ElementName=DgrXCustomers}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ExtendedGridControl:ExtendedDataGrid>
+        <StackPanel Grid.Column="1">
+            <StackPanel IsEnabled="{Binding XCustomer.Log_upd_user, Converter={StaticResource enableConverter}}">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="FcstModel: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboModel" HorizontalAlignment="left" Text="{Binding XCustomer.Fcst_model}" ItemsSource="{Binding LstModel}" DisplayMemberPath="fcst_model">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding DataContext.SelChangeModel,ElementName=XCustomersView}"
+                             CommandParameter="{Binding SelectedValue,ElementName=CboModel}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Customer: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboCustomer"  Width="200" Text="{Binding XCustomer.Customer_code}" ItemsSource="{Binding LstCust}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding DataContext.SelChangeCust,ElementName=XCustomersView}"
+                             CommandParameter="{Binding SelectedValue,ElementName=CboCustomer}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Door: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboDoor"  Width="200" Text="{Binding XCustomer.Customer_door}" ItemsSource="{Binding LstDoor}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding DataContext.SelChangeDoor,ElementName=XCustomersView}"
+                             CommandParameter="{Binding SelectedValue,ElementName=CboDoor}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="CrossCustomer: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CboXCustomer"  Width="200" Text="{Binding XCustomer.CrossCustomer_code}" ItemsSource="{Binding LstCust}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding DataContext.SelChangeXCust,ElementName=XCustomersView}"
+                             CommandParameter="{Binding SelectedValue,ElementName=CboXCustomer}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="CrossDoor: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="TxtXDoor"  Width="200" Text="{Binding XCustomer.CrossCustomer_door}" ItemsSource="{Binding LstXDoor}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="CrossCountry: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CboXCtry"  SelectedItem="{Binding SelXCtry}"  Width="200" ItemsSource="{Binding LstXCtry}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding countryId}" />
+                                <Run Text=" - " />
+                                <Run Text="{Binding countryDesc}" />
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Deleted: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <CheckBox x:Name="TxtDel"  Width="200" IsChecked="{Binding XCustomer.Deleted_flag}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,5" HorizontalAlignment="Right">
+                <Button x:Name="BtnDuplicate" Width="80" Margin="0,0,5,0" Content="Duplicate" Command="{Binding DataContext.Duplicate,ElementName=XCustomersView}">
+                <Button.Visibility>
+                    <MultiBinding Converter="{StaticResource boolToVisConverter}">
+                        <Binding ElementName="CboModel" Path="IsEnabled"/>
+                    </MultiBinding>
+                </Button.Visibility>
+                </Button>
+                <Button x:Name="BtnUpd"  Width="80" Content="{Binding XCustomer.Log_upd_user,Converter={StaticResource cmdTxtConverter}}" Command="{Binding DataContext.AddXCustomer,ElementName=XCustomersView}"  CommandParameter="Add"/>
+                <Button x:Name="BtnDel" Content="Delete" Margin="5,0,0,0" Width="80" Command="{Binding DataContext.AddXCustomer,ElementName=XCustomersView}" CommandParameter="Del">
+                    <Button.IsEnabled>
+                        <Binding ElementName="CboModel" Path="IsEnabled" Converter="{StaticResource revBoolConverter}"/>
+                    </Button.IsEnabled>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

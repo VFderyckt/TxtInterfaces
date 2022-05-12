@@ -1,0 +1,32 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TxtInterfaces.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CustTypes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">|FR|KA|OTH</Value>
+    </Setting>
+    <Setting Name="VFTXT_IFACESConnectionString1" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=veat2atxtsqlqa\sql_whs_qa;Initial Catalog=VFTXT_IFACES;Integrated Security=True&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=veat2atxtsqlqa\sql_whs_qa;Initial Catalog=VFTXT_IFACES;Integrated Security=True</Value>
+    </Setting>
+    <Setting Name="SAPReqSeg" Type="System.String" Scope="User">
+      <Value Profile="(Default)">@TIM|DIS_PB|DIS_RO|WHS_PB|WHS_RO@VAN|WHS_PB|WHS_RO@TTV|DIS_PB|DIS_RO|WHS_PB|WHS_RO</Value>
+    </Setting>
+    <Setting Name="SAPSsn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">@TIM|45FW|45SS@VAN|30F0|50F0|30H0|50H0|30S0|50S0@TTV|45FW|45SS</Value>
+    </Setting>
+    <Setting Name="TxtChannel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">@TIM|DE|DS|WH@VAN|DS|WH@TTV|DE|DS|WH</Value>
+    </Setting>
+    <Setting Name="TxtOrderType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">@TIM|PS|RO@VAN|PS|RO@TTV|PS|RO</Value>
+    </Setting>
+    <Setting Name="TxtCust" Type="System.String" Scope="User">
+      <Value Profile="(Default)">@TIM|DE_OTHER|DS_OTHER|WH_OTHER@VAN|DS_OTHER|WH_OTHER@TTV|DE_OTHER|DS_OTHER|WH_OTHER</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

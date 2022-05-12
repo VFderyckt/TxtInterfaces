@@ -1,0 +1,40 @@
+﻿<Application x:Class="TxtInterfaces.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TxtInterfaces"
+             xmlns:controls="clr-namespace:TxtInterfaces.Controls"
+             xmlns:vm="clr-namespace:TxtInterfaces.ViewModel"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <DataTemplate  DataType="{x:Type vm:CountriesViewModel}">
+            <controls:Countries/>
+        </DataTemplate>
+        <DataTemplate  DataType="{x:Type vm:CustomersViewModel}">
+            <controls:Customers/>
+        </DataTemplate>
+        <DataTemplate  DataType="{x:Type vm:PlantsViewModel}">
+            <controls:Plants/>
+        </DataTemplate>
+        <DataTemplate  DataType="{x:Type vm:SeasonsViewModel}">
+            <controls:Seasons/>
+        </DataTemplate>
+        <DataTemplate  DataType="{x:Type vm:XCustomersViewModel}">
+            <controls:XCustomers/>
+        </DataTemplate>
+        <DataTemplate  DataType="{x:Type vm:SAPvsTxtViewModel}">
+            <controls:SAPvsTxt/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ImpCustViewModel}">
+            <controls:ImpCust/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ImpSeasonsViewModel}">
+            <controls:ImpSeasons/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CpyEopsViewModel}">
+        <controls:CpyEOPS/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SplitChannelViewModel}">
+            <controls:SplitChannel/>
+        </DataTemplate>
+    </Application.Resources>
+</Application>

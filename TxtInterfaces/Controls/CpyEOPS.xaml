@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="TxtInterfaces.Controls.CpyEOPS"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TxtInterfaces.Controls"
+             mc:Ignorable="d" 
+            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TxtInterfaces.Classes"
+             l:AttachedBehaviours.LoadedCommand="{Binding DataContext.GetCpyEops,ElementName=CpyEopsView}"
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="CpyEopsView">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="FcstModel: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CboModel" HorizontalAlignment="left" ItemsSource="{Binding LstModel}" DisplayMemberPath="fcst_model" Text="{Binding SelMod}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding DataContext.SelChangeModel,ElementName=CpyEopsView}"
+                             CommandParameter="{Binding SelectedValue,ElementName=CboModel}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Season: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CboSsn"  Width="200" SelectedValue="{Binding SelSsn}" ItemsSource="{Binding LstSeasons}" DisplayMemberPath="Fcst_collection" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Product Category: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CboProdCat"  Width="200" Text="{Binding SelProdCat}" ItemsSource="{Binding LstProdCat}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Last Existing Version: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TxtVersion"  Width="200" Text="{Binding SelSsn.LastDate}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,5" HorizontalAlignment="Right">
+                <Button x:Name="BtnCrea" Content="Create EOPS"  Width="80" Command="{Binding DataContext.CmdCreate,ElementName=CpyEopsView}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
