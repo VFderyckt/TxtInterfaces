@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="VFTXT_IFACES" Class="TxtIfacesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=veat2w000142\sql_vans_reef;Initial Catalog=VFTXT_IFACES;Integrated Security=True" SettingsObjectName="TxtInterfaces.Properties.Settings" SettingsPropertyName="VFTXT_IFACESConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=veat2atxtsqlqa\sql_whs_qa;Initial Catalog=VFTXT_IFACES;Integrated Security=True" SettingsObjectName="TxtInterfaces.Properties.Settings" SettingsPropertyName="VFTXT_IFACESConnectionString1" Provider="System.Data.SqlClient" />
   <Function Name="dbo.sp_Interface_GetParams" Method="sp_Interface_GetParams">
     <Parameter Name="userid" Type="System.String" DbType="VarChar(20)" />
     <ElementType Name="sp_Interface_GetParamsResult">
@@ -323,6 +323,24 @@
     <Parameter Name="offset" Type="System.Int32" DbType="Int" />
     <Parameter Name="useplant" Type="System.Boolean" DbType="Bit" />
     <Parameter Name="fcst_dc" Type="System.String" DbType="VarChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Interface_GetSizeSplit" Method="sp_Interface_GetSizeSplit">
+    <ElementType Name="sp_Interface_GetSizeSplitResult">
+      <Column Name="Fcst_model" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Collection" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Collection_History" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Log_upd_time" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Log_upd_user" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Deleted_flag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Interface_UpdSizeSplit" Method="sp_Interface_UpdSizeSplit">
+    <Parameter Name="Add" Parameter="add" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Fcst_model" Parameter="fcst_model" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="Collection" Parameter="collection" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CollectionHistory" Parameter="collectionHistory" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Deleted_flag" Parameter="deleted_flag" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
 </Database>

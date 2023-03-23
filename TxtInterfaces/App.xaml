@@ -36,5 +36,8 @@
         <DataTemplate DataType="{x:Type vm:SplitChannelViewModel}">
             <controls:SplitChannel/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SizeSplitViewModel}">
+            <controls:SizeSplit/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

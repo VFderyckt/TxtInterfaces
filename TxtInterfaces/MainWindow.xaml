@@ -28,6 +28,7 @@
             <MenuItem Header="_ImportSetup">
                 <MenuItem Header="_Seasons" Command="{Binding DataContext.LoadChild,ElementName=MainWindowView}" CommandParameter="ImpSeason"/>
                 <MenuItem Header="_Customers" Command="{Binding DataContext.LoadChild,ElementName=MainWindowView}" CommandParameter="ImpCust"/>
+                <MenuItem Header="_Size Split" Command="{Binding DataContext.LoadChild,ElementName=MainWindowView}" CommandParameter="SizeSplit"/>
             </MenuItem>
             <MenuItem Header="_Copies" Visibility="{Binding VisAud}">
                 <MenuItem Header="_End of Pre Season" Command="{Binding DataContext.LoadChild,ElementName=MainWindowView}" CommandParameter="EOPS"/>

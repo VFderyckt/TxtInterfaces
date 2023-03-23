@@ -285,6 +285,20 @@ namespace TxtInterfaces.Data
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), add, fcst_model, sapreqseg, sapplant, sapssnyr, sapssn, txtcoll, txtchannel, txtordertype, txtcustomer, export, sapextregid, alignso, fcst, offset, useplant, fcst_dc);
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Interface_GetSizeSplit")]
+		public ISingleResult<sp_Interface_GetSizeSplitResult> sp_Interface_GetSizeSplit()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<sp_Interface_GetSizeSplitResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Interface_UpdSizeSplit")]
+		public int sp_Interface_UpdSizeSplit([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Add", DbType="Bit")] System.Nullable<bool> add, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Fcst_model", DbType="VarChar(3)")] string fcst_model, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Collection", DbType="VarChar(10)")] string collection, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CollectionHistory", DbType="VarChar(10)")] string collectionHistory, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Deleted_flag", DbType="Int")] System.Nullable<int> deleted_flag)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), add, fcst_model, collection, collectionHistory, deleted_flag);
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	public partial class sp_Interface_GetParamsResult
@@ -2614,6 +2628,122 @@ namespace TxtInterfaces.Data
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deleted_flag", DbType="Int")]
 		public System.Nullable<int> Deleted_flag
+		{
+			get
+			{
+				return this._Deleted_flag;
+			}
+			set
+			{
+				if ((this._Deleted_flag != value))
+				{
+					this._Deleted_flag = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_Interface_GetSizeSplitResult
+	{
+		
+		private string _Fcst_model;
+		
+		private string _Collection;
+		
+		private string _Collection_History;
+		
+		private System.Nullable<System.DateTime> _Log_upd_time;
+		
+		private string _Log_upd_user;
+		
+		private int _Deleted_flag;
+		
+		public sp_Interface_GetSizeSplitResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fcst_model", DbType="VarChar(3) NOT NULL", CanBeNull=false)]
+		public string Fcst_model
+		{
+			get
+			{
+				return this._Fcst_model;
+			}
+			set
+			{
+				if ((this._Fcst_model != value))
+				{
+					this._Fcst_model = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Collection", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
+		public string Collection
+		{
+			get
+			{
+				return this._Collection;
+			}
+			set
+			{
+				if ((this._Collection != value))
+				{
+					this._Collection = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Collection_History", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
+		public string Collection_History
+		{
+			get
+			{
+				return this._Collection_History;
+			}
+			set
+			{
+				if ((this._Collection_History != value))
+				{
+					this._Collection_History = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Log_upd_time", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> Log_upd_time
+		{
+			get
+			{
+				return this._Log_upd_time;
+			}
+			set
+			{
+				if ((this._Log_upd_time != value))
+				{
+					this._Log_upd_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Log_upd_user", DbType="VarChar(20)")]
+		public string Log_upd_user
+		{
+			get
+			{
+				return this._Log_upd_user;
+			}
+			set
+			{
+				if ((this._Log_upd_user != value))
+				{
+					this._Log_upd_user = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deleted_flag", DbType="Int NOT NULL")]
+		public int Deleted_flag
 		{
 			get
 			{

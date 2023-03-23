@@ -34,6 +34,11 @@ namespace TxtInterfaces.Data
             TxtIfacesDataContext ctx = new TxtIfacesDataContext();
             return ctx.sp_Interface_GetImpSeasons().ToList();
         }
+        public List<sp_Interface_GetSizeSplitResult> GetSizeSplit()
+        {
+            TxtIfacesDataContext ctx = new TxtIfacesDataContext();
+            return ctx.sp_Interface_GetSizeSplit().ToList();
+        }
         public List<sp_Interface_GetImportCustomersResult> GetImpCust()
         {
             TxtIfacesDataContext ctx = new TxtIfacesDataContext();
@@ -132,6 +137,11 @@ namespace TxtInterfaces.Data
             TxtIfacesDataContext ctx = new TxtIfacesDataContext();
             ctx.sp_Interface_UpdImpSeason(ImpSsn.Log_upd_user == "" ? true : false, ImpSsn.Fcst_model,ImpSsn.Fcst_collection,ImpSsn.Fcst_ImportActive,ImpSsn.DueDateFrom,
                 ImpSsn.DueDateTo,ImpSsn.SFA_Collection,ImpSsn.Storedatefrom,ImpSsn.Storedateto,ImpSsn.DeadlineDate,ImpSsn.ForecastingUntilDate,ImpSsn.Deleted_flag);
+        }
+        public void UpdSizeSplit(sp_Interface_GetSizeSplitResult SS)
+        {
+            TxtIfacesDataContext ctx = new TxtIfacesDataContext();
+            ctx.sp_Interface_UpdSizeSplit(SS.Log_upd_user == "" ? true : false, SS.Fcst_model, SS.Collection, SS.Collection_History, SS.Deleted_flag);
         }
         public void UpdCfgSplitChannel(sp_Interface_GetCfgSplitChannelResult CfgSplitChannel)
         {

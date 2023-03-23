@@ -103,6 +103,9 @@
     <Compile Include="Controls\Seasons.xaml.cs">
       <DependentUpon>Seasons.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SizeSplit.xaml.cs">
+      <DependentUpon>SizeSplit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SplitChannel.xaml.cs">
       <DependentUpon>SplitChannel.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,7 @@
     <Compile Include="ViewModel\PlantsViewModel.cs" />
     <Compile Include="ViewModel\SAPvsTxtViewModel.cs" />
     <Compile Include="ViewModel\SeasonsViewModel.cs" />
+    <Compile Include="ViewModel\SizeSplitViewModel.cs" />
     <Compile Include="ViewModel\SplitChannelViewModel.cs" />
     <Compile Include="ViewModel\XCustomersViewModel.cs" />
     <Page Include="Controls\Countries.xaml">
@@ -158,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Seasons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SizeSplit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

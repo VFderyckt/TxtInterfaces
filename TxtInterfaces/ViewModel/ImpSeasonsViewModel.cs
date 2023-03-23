@@ -91,11 +91,11 @@ namespace TxtInterfaces.ViewModel
         }
 
         private void SelChangeExecute(object Parameter)
-        {
-
-            sp_Interface_GetImpSeasonsResult p = ((sp_Interface_GetImpSeasonsResult)Parameter);
-            if (p != null)
+        {   
+            if (Parameter != null && Parameter.ToString() != "")
             {
+                sp_Interface_GetImpSeasonsResult p = ((sp_Interface_GetImpSeasonsResult)Parameter);
+                LstCollection = p.Log_upd_user != ""? new List<string> { p.Fcst_collection }: UpdLstCollection(p.Fcst_model); 
                 ImpSeason = new sp_Interface_GetImpSeasonsResult()
                 {
                     Fcst_model = p.Fcst_model,
@@ -119,12 +119,16 @@ namespace TxtInterfaces.ViewModel
         }
         private void SelChangeModelExecute(object Parameter)
         {
-            if (Parameter != null)
+            if (Parameter != null && ImpSeason.Log_upd_user == "")
             {
-                sp_Interface_GetFcstModelsResult x = (sp_Interface_GetFcstModelsResult)Parameter;
-                LstCollection = _lstSeasons.Where(a => a.Fcst_model == x.fcst_model && a.Fcst_coll_Level==0).Select(a => a.Fcst_collection).
-                    Except(LstImpSeasons.Where(a=>a.Fcst_model==x.fcst_model).Select(a=>a.Fcst_collection)).ToList();
+                LstCollection = UpdLstCollection(((sp_Interface_GetFcstModelsResult)Parameter).fcst_model);
             }
+        }
+
+        private List<string> UpdLstCollection(string FcstModel)
+        {
+            return _lstSeasons.Where(a => a.Fcst_model == FcstModel && a.Fcst_coll_Level == 0).Select(a => a.Fcst_collection).
+                Except(LstImpSeasons.Where(a => a.Fcst_model == FcstModel).Select(a => a.Fcst_collection)).ToList();
         }
         public ICommand SelChange
         {

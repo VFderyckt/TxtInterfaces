@@ -70,6 +70,7 @@ namespace TxtInterfaces.ViewModel
                case "SAPvsTxt": if (CurrentView == null || CurrentView.GetType().ToString() != "TxtInterfaces.ViewModel.SAPvsTxtViewModel") CurrentView = new SAPvsTxtViewModel(); Caption = "SAP vs TXT";  return;
                case "ImpCust": if (CurrentView == null || CurrentView.GetType().ToString() != "TxtInterfaces.ViewModel.ImpCustViewModel") CurrentView = new ImpCustViewModel(); Caption = "Import Customers"; return;
                case "ImpSeason": if (CurrentView == null || CurrentView.GetType().ToString() != "TxtInterfaces.ViewModel.ImpSeasonsViewModel") CurrentView = new ImpSeasonsViewModel(); Caption="Import Seasons";return;
+               case "SizeSplit": if (CurrentView == null || CurrentView.GetType().ToString() != "TxtInterfaces.ViewModel.SizeSplitViewModel") CurrentView = new SizeSplitViewModel(); Caption = "Size Split"; return;
                case "EOPS": if (CurrentView == null || CurrentView.GetType().ToString() != "TxtInterfaces.ViewModel.CpyEopsViewModel") CurrentView = new CpyEopsViewModel(); Caption = "Copy EOS"; return;
                case "SplitChannel": if (CurrentView == null || CurrentView.GetType().ToString() != "TxtInterfaces.ViewModel.SplitChannelViewModel") CurrentView = new SplitChannelViewModel(); Caption = "Split Channel"; return;
             }

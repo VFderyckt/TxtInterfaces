@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="TxtInterfaces.Controls.SizeSplit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TxtInterfaces.Controls"
+             xmlns:ExtendedGridControl="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"
+             xmlns:ExtendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TxtInterfaces.Classes"
+             l:AttachedBehaviours.LoadedCommand="{Binding DataContext.GetSizeSplit,ElementName=SizeSplitView}"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="SizeSplitView">
+    <UserControl.Resources>
+        <l:CmdTxtConverter x:Key="cmdTxtConverter" />
+        <l:EnableConverter x:Key="enableConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <ExtendedGridControl:ExtendedDataGrid GroupByControlVisibility="Collapsed" x:Name="DgrSizeSplit" ItemsSource="{Binding LstSizeSplit}" IsReadOnly="true" Margin="5" SelectionMode="Single">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding DataContext.SelChange,ElementName=SizeSplitView}"
+                             CommandParameter="{Binding SelectedItem,ElementName=DgrSizeSplit}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ExtendedGridControl:ExtendedDataGrid>
+        <StackPanel Grid.Column="1">
+            <StackPanel IsEnabled="{Binding SizeSplit.Log_upd_user, Converter={StaticResource enableConverter}}">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="FcstModel: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboModel" HorizontalAlignment="left" Text="{Binding SizeSplit.Fcst_model}" ItemsSource="{Binding LstModel}" DisplayMemberPath="fcst_model">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding DataContext.SelChangeModel,ElementName=SizeSplitView}"
+                             CommandParameter="{Binding SelectedValue,ElementName=CboModel}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Collection: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboCollection"  Text="{Binding SizeSplit.Collection}" ItemsSource="{Binding LstCollection}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Collection History: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="CboCollectionHistory"  Text="{Binding SizeSplit.Collection_History}" ItemsSource="{Binding LstCollectionHistory}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Deleted: " Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <CheckBox x:Name="TxtDel"  Width="200" IsChecked="{Binding SizeSplit.Deleted_flag}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,5" HorizontalAlignment="Right">
+                <Button x:Name="BtnUpd" Content="{Binding SizeSplit.Log_upd_user, Converter={StaticResource cmdTxtConverter}}"  Width="80" Command="{Binding DataContext.AddSizeSplit,ElementName=SizeSplitView}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
